@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Playing with OMDb</title>
+<script>
+function myFunction(response) {
+
+    var a = JSON.parse(response);
+
+    var i;
+    var out = "<p>";
+
+        out +=a.Title +
+        "----------" +
+        a.Actors +
+        "----------" +
+        a.Director +
+        "  <br>   ";
+  
+    out += "</p>";
+    document.getElementById("id01").innerHTML += out;
+document.getElementById("poster").src=a.Poster;
+document.getElementById("poster").alt=a.Title;
+
+
+}
+
+function getURL(){
+var movieName=document.getElementById("movie").value;
+xmlhttp = new XMLHttpRequest();
+url="http://www.omdbapi.com/?t="+movieName+"&y=&plot=full&r=json";
+
+xmlhttp.onreadystatechange=function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+        myFunction(xmlhttp.responseText);
+
+    }
+}
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+
+}
+</script>
+</head>
+
+<body>
+
+<h1>Movie Info</h1>
+Enter movie name<input type="text" id="movie"></input>
+<Button id="getinfo" onClick="getURL()">Go!</button>
+<div id="id01">
+<img id="poster"/>
+</div>
+
+<script>
+//var xmlhttp = new XMLHttpRequest();
+//var url = "http://www.omdbapi.com/?t=Amelie&y=&plot=full&r=json";
+var xmlhttp;
+var url;
+
+
+
+
+</script>
+
+</body>
+</html>
+
